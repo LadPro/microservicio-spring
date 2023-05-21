@@ -1,0 +1,26 @@
+
+# trigger:
+# - feature-ms-joelMora-mensaje
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Gradle@3
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: 'build jacocoTestReport'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    sonarQubeRunAnalysis: false
+    spotBugsAnalysis: false
+  displayName: Compilacion
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'JaCoCo'
+    summaryFileLocation: '.\build\jacocoHtml\index.html'
+    pathToSources: '.\src\main\java'
+    reportDirectory: '.\build\reports\tests'
+    failIfCoverageEmpty: true
