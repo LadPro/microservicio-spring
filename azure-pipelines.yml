@@ -1,6 +1,6 @@
 
-trigger:
-- feature-ms-joelMora-mensaje
+# trigger:
+# - feature-ms-joelMora-mensaje
 
 pool:
   vmImage: ubuntu-latest
