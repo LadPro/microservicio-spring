@@ -4,10 +4,11 @@ plugins {
 	id 'java'
 	id 'jacoco'
 }
-jacoco {
-    toolVersion = "0.8.8"
-    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
-}
+// jacoco {
+//     toolVersion = "0.8.10"
+//     reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+// }
+
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
@@ -26,11 +27,25 @@ test {
 	useJUnitPlatform()
 }
 
+
+
 jacocoTestReport {
 	dependsOn test
      reports {
-        xml.required = false
+ 		xml.required = true
         csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+        html.destination file("${buildDir}/reports/html/jacoco")
+        xml.destination file("${buildDir}/reports/xml/jacoco")
+       // csv.destination file("${buildDir}/reports/csv/jacoco")
     }
 }
+// jacocoTestReport {
+// 	dependsOn test
+//      reports {
+// 		//xml.enabled = true
+//         //html.required = false
+//         csv.required = false
+//         //xml.destination = file("jacocoxml/jacoco.xml")
+// 		//xml.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+//     }
+// }
